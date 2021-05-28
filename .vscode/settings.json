@@ -1,0 +1,7 @@
+{
+	"workbench.colorTheme": "Atom One Light",
+	"powermode.enabled": true,
+	"powermode.enableShake": false,
+	"workbench.iconTheme": "material-icon-theme",
+	"powermode.presets": "particles"
+}
