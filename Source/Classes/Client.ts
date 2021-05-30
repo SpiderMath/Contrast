@@ -10,6 +10,8 @@ export default class GasperClient extends Client {
 	public commands: Collection<string, Command> = new Collection();
 	public aliases: Collection<string, string> = new Collection();
 	public logger = Logger;
+	// @ts-ignore
+	public prefixes: string[];
 
 	constructor() {
 		super({
@@ -24,6 +26,10 @@ export default class GasperClient extends Client {
 	start(config: Config) {
 		this._loadCommands(config.commandDir);
 		this._loadEvents(config.eventDir);
+
+		// Prefix handler
+		if(typeof config.prefixes === "string") config.prefixes = [config.prefixes];
+		this.prefixes = config.prefixes;
 
 		super.login(config.token);
 	}

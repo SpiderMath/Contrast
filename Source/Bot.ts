@@ -7,4 +7,5 @@ new GasperClient()
 		token: process.env.TOKEN,
 		commandDir: `${__dirname}/Commands`,
 		eventDir: `${__dirname}/Events`,
+		prefixes: ["`", "*"],
 	});
