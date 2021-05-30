@@ -22,6 +22,23 @@ const MessageEvent: Event = {
 		if(!prefix.length) return;
 
 		// Getting content APART from prefix
+		const args = message.content.slice(prefix.length).split(/ +/g);
+		// Using RegEx to remove extra spaces ^^^
+
+		const commandName = args.shift()?.toLowerCase();
+
+		// @ts-ignore
+		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
+
+		if(!command) return;
+
+		try {
+			command.run(client, message, args);
+		}
+		catch(err) {
+			client.logger.error(`client/commands/${command.name}`, err.message);
+			return message.channel.send(client.messages.error(err));
+		}
 	},
 };
 

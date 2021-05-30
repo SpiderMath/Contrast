@@ -8,4 +8,9 @@ new GasperClient()
 		commandDir: `${__dirname}/Commands`,
 		eventDir: `${__dirname}/Events`,
 		prefixes: ["`", "*"],
+		emotes: {
+			error: "840147176360378388",
+			success: "840147155112165406",
+			loading: "840147214193917963",
+		},
 	});

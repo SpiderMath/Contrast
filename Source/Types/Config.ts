@@ -3,6 +3,11 @@ interface Config {
 	commandDir: string,
 	eventDir: string,
 	prefixes: string | string[],
+	emotes: {
+		error: string,
+		success: string,
+		loading: string,
+	}
 };
 
 export { Config };

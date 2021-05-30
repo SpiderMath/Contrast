@@ -5,6 +5,7 @@ import { Command } from "../Types/Command";
 import { Config } from "../Types/Config";
 import Logger from "../Helpers/Logger";
 import { Event } from "../Types/Event";
+import { stripIndents } from "common-tags";
 
 export default class GasperClient extends Client {
 	public commands: Collection<string, Command> = new Collection();
@@ -12,6 +13,22 @@ export default class GasperClient extends Client {
 	public logger = Logger;
 	// @ts-ignore
 	public prefixes: string[];
+	public messages = {
+		error: (err: Error) => stripIndents`
+		${this.emotes.error} Something went wrong while executing the command! Please try again later!
+		Error: ${err.message}
+		`,
+	};
+	// @ts-ignore
+	public emotes: {
+		success: string,
+		error: string,
+		loading: string,
+	} = {
+		success: "",
+		error: "",
+		loading: "",
+	};
 
 	constructor() {
 		super({
@@ -32,6 +49,22 @@ export default class GasperClient extends Client {
 		this.prefixes = config.prefixes;
 
 		super.login(config.token);
+
+		this.on("ready", () => {
+			Object
+				.keys(this.emotes)
+				.forEach(emoteName => {
+					// @ts-ignore
+					const emojiID: string | undefined = config.emotes[emoteName];
+
+					if(!emojiID) throw new Error(`Emoji ${emoteName} not provided`);
+
+					// @ts-ignore
+					this.emotes[emoteName] = this.emojis.cache.get(emojiID);
+
+					this.logger.success("client/emotes", `Loaded emote: ${emoteName}`);
+				});
+		});
 	}
 
 	private _loadCommands(commandDir: string) {
