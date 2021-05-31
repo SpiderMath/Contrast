@@ -43,6 +43,8 @@ const MessageEvent: Event = {
 			`);
 		}
 
+		if(command.guildOnly && !message.guild) return message.channel.send(`${client.emotes.error} This command can only be executed in a server channel!`);
+
 		try {
 			command.run(client, message, args);
 		}

@@ -8,6 +8,7 @@ interface Command {
 	run: RunFunction,
 	category?: string,
 	ownerOnly?: boolean,
+	guildOnly?: boolean,
 };
 
 interface RunFunction {
