@@ -40,7 +40,6 @@ export default class GasperClient extends Client {
 
 		// Prefix handler
 		if(typeof config.prefixes === "string") config.prefixes = [config.prefixes];
-		this.prefixes = config.prefixes;
 
 		super.login(config.token);
 
@@ -61,6 +60,14 @@ export default class GasperClient extends Client {
 
 			// @ts-ignore
 			this.owner = this.users.cache.get(config.ownerID);
+
+			// @ts-ignore
+			config.prefixes.push(`<@${this.user?.id}>`);
+			// @ts-ignore
+			config.prefixes.push(`<@!${this.user?.id}>`);
+
+			// @ts-ignore
+			this.prefixes = config.prefixes;
 		});
 	}
 

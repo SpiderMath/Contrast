@@ -23,7 +23,7 @@ const MessageEvent: Event = {
 		if(!prefix.length) return;
 
 		// Getting content APART from prefix
-		const args = message.content.slice(prefix.length).split(/ +/g);
+		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		// Using RegEx to remove extra spaces ^^^
 
 		const commandName = args.shift()?.toLowerCase();
