@@ -1,5 +1,6 @@
 import { stripIndents } from "common-tags";
 import { Message } from "discord.js";
+import AutoReactOnMention from "../Plugins/AutoReactOnMention";
 import { Event } from "../Types/Event";
 
 const MessageEvent: Event = {
@@ -31,7 +32,10 @@ const MessageEvent: Event = {
 		// @ts-ignore
 		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
 
-		if(!command) return;
+		if(!command) {
+			AutoReactOnMention(message);
+			return;
+		}
 
 		if(command.ownerOnly && client.owner.id === message.author.id) {
 			return message.channel.send(stripIndents`
