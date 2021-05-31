@@ -1,4 +1,4 @@
-import { Client, Collection, Intents } from "discord.js";
+import { Client, Collection, Intents, User } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../Types/Command";
@@ -20,15 +20,9 @@ export default class GasperClient extends Client {
 		`,
 	};
 	// @ts-ignore
-	public emotes: {
-		success: string,
-		error: string,
-		loading: string,
-	} = {
-		success: "",
-		error: "",
-		loading: "",
-	};
+	public emotes = { success: "", error: "", loading: "" };
+	// @ts-ignore
+	public owner: User;
 
 	constructor() {
 		super({
@@ -64,6 +58,9 @@ export default class GasperClient extends Client {
 
 					this.logger.success("client/emotes", `Loaded emote: ${emoteName}`);
 				});
+
+			// @ts-ignore
+			this.owner = this.users.cache.get(config.ownerID);
 		});
 	}
 

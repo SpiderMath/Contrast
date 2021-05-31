@@ -7,7 +7,8 @@ interface Config {
 		error: string,
 		success: string,
 		loading: string,
-	}
+	},
+	ownerID: string,
 };
 
 export { Config };

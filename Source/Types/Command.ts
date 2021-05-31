@@ -7,6 +7,7 @@ interface Command {
 	aliases?: string[],
 	run: RunFunction,
 	category?: string,
+	ownerOnly?: boolean,
 };
 
 interface RunFunction {

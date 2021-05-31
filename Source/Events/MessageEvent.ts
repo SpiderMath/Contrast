@@ -1,3 +1,4 @@
+import { stripIndents } from "common-tags";
 import { Message } from "discord.js";
 import { Event } from "../Types/Event";
 
@@ -31,6 +32,12 @@ const MessageEvent: Event = {
 		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
 
 		if(!command) return;
+
+		if(command.ownerOnly && client.owner.id === message.author.id) {
+			return message.channel.send(stripIndents`
+				${client.emotes.error} To use this command, you have to be as **crazy** & **nerdy** as my owner ${client.owner.tag}
+			`);
+		}
 
 		try {
 			command.run(client, message, args);
