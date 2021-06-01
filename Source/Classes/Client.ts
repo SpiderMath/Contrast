@@ -7,7 +7,7 @@ import Logger from "../Helpers/Logger";
 import { Event } from "../Types/Event";
 import { stripIndents } from "common-tags";
 
-export default class GasperClient extends Client {
+class GasperClient extends Client {
 	public commands: Collection<string, Command> = new Collection();
 	public aliases: Collection<string, string> = new Collection();
 	public logger = Logger;
@@ -138,3 +138,5 @@ export default class GasperClient extends Client {
 			});
 	}
 };
+
+export default GasperClient;
