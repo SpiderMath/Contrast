@@ -64,7 +64,7 @@ export default class GasperClient extends Client {
 					if(!this.emotes[emoteName]) throw new Error(`${emojiID} is not a valid emoji!`);
 					// Checking if there was an emote found for the given ID
 
-					this.logger.success("client/emotes", `Loaded emote: ${emoteName} 💪`);
+					this.logger.success("client/emotes", `Loaded emote: ${emoteName} 👀`);
 					// Message signifying the loading
 				});
 
