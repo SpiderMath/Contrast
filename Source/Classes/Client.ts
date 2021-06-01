@@ -84,6 +84,15 @@ export default class GasperClient extends Client {
 
 					pull.category = dir;
 
+					if(!pull.credits) pull.credits = [];
+
+					pull.credits.push({
+						name: "Defective Detective",
+						reason: "Code",
+						mainURL: "https://github.com/SpiderMath",
+						reasonURL: "https://github.com/SpiderMath/Gasper",
+					});
+
 					this.commands.set(pull.name.toLowerCase(), pull);
 
 					if(pull.aliases) for(const alias of pull.aliases) this.aliases.set(pull.name.toLowerCase(), alias.toLowerCase());

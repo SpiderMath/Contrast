@@ -9,6 +9,14 @@ interface Command {
 	category?: string,
 	ownerOnly?: boolean,
 	guildOnly?: boolean,
+	credits?: Credit[],
+};
+
+interface Credit {
+	name: string,
+	reason: string,
+	mainURL: string,
+	reasonURL?: string,
 };
 
 interface RunFunction {
