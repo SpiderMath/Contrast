@@ -1,24 +1,26 @@
 import { stripIndents } from "common-tags";
-import { MessageEmbed } from "discord.js";
 import { Command } from "../../Types/Command";
 
 const PingCommand: Command = {
 	name: "ping",
 	description: "Gets the API Latency of the Bot",
 	async run(client, message) {
-		const msg = await message.channel.send("Pinging...");
+		let PingEmbed = client
+			.embed(message.author)
+			.setTitle("API Latency")
+			.setDescription(`${client.emotes.loading} Pinging...`);
 
-		const PingEmbed = new MessageEmbed()
-			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+		const msg = await message.channel.send(PingEmbed);
+
+		PingEmbed = client
+			.embed(message.author)
 			.setTitle("API Latency")
 			.setDescription(stripIndents`
-				The Websocket Ping of the Bot is: ${client.ws.ping} ms
-				The Heartbeart 💝 of the bot is: ${msg.createdTimestamp - message.createdTimestamp} ms
-			`)
-			.setColor("GREEN");
+				Websocket Ping 💻 : ${client.ws.ping} ms
+				Heartbeart 💞: ${msg.createdTimestamp - message.createdTimestamp} ms
+			`);
 
-		message.channel.send(PingEmbed)
-			.then(() => msg.delete());
+		msg.edit(PingEmbed);
 	},
 };
 

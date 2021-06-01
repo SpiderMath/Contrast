@@ -1,4 +1,4 @@
-import { Client, Collection, Intents, User } from "discord.js";
+import { Client, Collection, ColorResolvable, Intents, MessageEmbed, User } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import { Command } from "../Types/Command";
@@ -136,6 +136,13 @@ class GasperClient extends Client {
 				this.logger.success("client/events", `Listening for event ${pull.name} 👂`);
 				// Notifying myself that it did load 😀
 			});
+	}
+
+	public embed(author: User, color: ColorResolvable = "GREEN") {
+		return new MessageEmbed()
+			.setColor(color)
+			.setAuthor(author.tag, author.displayAvatarURL() || author.defaultAvatarURL)
+			.setTimestamp();
 	}
 };
 
