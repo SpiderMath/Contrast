@@ -33,7 +33,7 @@ const MessageEvent: Event = {
 		const command = client.commands.get(commandName) || client.commands.get(client.aliases.get(commandName));
 
 		if(!command) {
-			AutoReactOnMention(message);
+			AutoReactOnMention(message, client);
 			return;
 		}
 

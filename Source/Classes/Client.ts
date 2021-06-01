@@ -23,6 +23,7 @@ export default class GasperClient extends Client {
 	public emotes = { success: "", error: "", loading: "" };
 	// @ts-ignore
 	public owner: User;
+	public autoReactOnMentionCooldown: Collection<string, number> = new Collection();
 
 	constructor() {
 		super({
