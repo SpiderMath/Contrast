@@ -10,6 +10,7 @@ import CommandManager from "./CommandManager";
 class ContrastingClient extends Client {
 	public commands: CommandManager;
 	public logger = Logger;
+	public prefixes: string[] = [];
 
 	constructor() {
 		super({
@@ -38,6 +39,8 @@ class ContrastingClient extends Client {
 	}
 
 	async start(config: StartConfig) {
+		this.prefixes = config.prefixes;
+
 		await this._loadEvents(config.eventDir);
 		await this._loadCommands(config.commandDir);
 		this.login(config.token);
