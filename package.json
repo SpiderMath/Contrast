@@ -5,7 +5,8 @@
   "main": "DoesNotExist.js",
   "dependencies": {
     "discord.js": "github:discordjs/discord.js",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@types/node": "^15.12.2",

@@ -1,10 +1,14 @@
-import { Client, Collection, Intents } from "discord.js";
+import { Client, Intents } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import StartConfig from "../Types/StartConfig";
+import Logger from "../Util/Logger";
+import BaseCommand from "./BaseCommand";
+import CommandManager from "./CommandManager";
 
 class ContrastingClient extends Client {
-	public commands = new Collection();
+	public commands: CommandManager;
+	public logger = Logger;
 
 	constructor() {
 		super({
@@ -27,6 +31,9 @@ class ContrastingClient extends Client {
 				],
 			},
 		});
+
+		// Assigning Commands to CommandManager
+		this.commands = new CommandManager(this);
 	}
 
 	async start(config: StartConfig) {
@@ -48,11 +55,15 @@ class ContrastingClient extends Client {
 					// Ah yes, import is a promise, unlike Node.js where it is require() OOF
 					// It is named Pseudopull because I'll be pulling the actual stuff using .default
 
-					const pull = new pseudoPull.default(this);
+					const pull = new pseudoPull.default(this) as BaseCommand;
+					console.log(pull);
 					// This is what I was talking about! Now pull's gonna be a class instance (needs client as param 😸), which extends our beloved BaseCommand 🤔
 
-					this.commands.set(pull.name.toLowerCase(), pull);
+					this.commands.register(pull);
 					// Setting it into our commands list properly 💃
+
+					// Logging to let the dumb owner know that the command was loaded
+					this.logger.success("client/commands", `Loaded Command ${pull.config.name}`);
 				}
 			});
 	}
