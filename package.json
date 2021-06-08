@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "npx tsc",
-    "run": "npm run re-iter",
+    "run": "npm run ts-node-dev",
     "dev": "npm run run",
     "ts-node-dev": "npx ts-node-dev ./Source/Bot.ts"
   },
