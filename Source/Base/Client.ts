@@ -4,6 +4,7 @@ import { join } from "path";
 import StartConfig from "../Types/StartConfig";
 import Logger from "../Util/Logger";
 import BaseCommand from "./BaseCommand";
+import BaseEvent from "./BaseEvent";
 import CommandManager from "./CommandManager";
 
 class ContrastingClient extends Client {
@@ -37,6 +38,7 @@ class ContrastingClient extends Client {
 	}
 
 	async start(config: StartConfig) {
+		await this._loadEvents(config.eventDir);
 		await this._loadCommands(config.commandDir);
 		this.login(config.token);
 	}
@@ -56,7 +58,6 @@ class ContrastingClient extends Client {
 					// It is named Pseudopull because I'll be pulling the actual stuff using .default
 
 					const pull = new pseudoPull.default(this) as BaseCommand;
-					console.log(pull);
 					// This is what I was talking about! Now pull's gonna be a class instance (needs client as param 😸), which extends our beloved BaseCommand 🤔
 
 					this.commands.register(pull);
@@ -75,7 +76,14 @@ class ContrastingClient extends Client {
 				// fName as the name suggests is the File name lul
 				const pseudoPull = await import(join(eventDir, fName));
 
-				const pull = new pseudoPull();
+				// Initialization
+				const pull = new pseudoPull.default(this) as BaseEvent;
+
+				// Listening for the event
+				this.on(pull.name, (...args: any[]) => pull.run(args));
+
+				// Logging to let the dumb dev know that his event is being listened to
+				this.logger.success("client/events", `Listening for Event ${pull.name}`);
 			});
 	}
 };
