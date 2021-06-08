@@ -63,8 +63,19 @@ class ContrastingClient extends Client {
 					// Setting it into our commands list properly 💃
 
 					// Logging to let the dumb owner know that the command was loaded
-					this.logger.success("client/commands", `Loaded Command ${pull.config.name}`);
+					this.logger.success("client/commands", `Loaded Command ${pull.name}`);
 				}
+			});
+	}
+
+	private async _loadEvents(eventDir: string) {
+		readdirSync(eventDir)
+		// This returns an array (string[]) of all the files in Event Dir
+			.forEach(async (fName) => {
+				// fName as the name suggests is the File name lul
+				const pseudoPull = await import(join(eventDir, fName));
+
+				const pull = new pseudoPull();
 			});
 	}
 };

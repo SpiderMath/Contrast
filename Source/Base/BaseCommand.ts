@@ -1,19 +1,19 @@
+import { Message } from "discord.js";
 import CommandConfig from "../Types/CommandConfig";
 import ContrastingClient from "./Client";
 
-class BaseCommand {
+abstract class BaseCommand {
 	public client: ContrastingClient;
-	public config: CommandConfig;
+	public name: string;
+	public description: string;
+	public aliases: string[];
 
 	// Takes in parameters
 	constructor(client: ContrastingClient) {
 		this.client = client;
-		this.config = {
-			name: "",
-			description: "",
-			aliases: [],
-			location: `${__filename}`,
-		};
+		this.name = "";
+		this.description = "";
+		this.aliases = [];
 
 		Object.defineProperty(
 			this,
@@ -28,12 +28,15 @@ class BaseCommand {
 
 	public configure(configuration: CommandConfig) {
 		Object.assign(
-			this.config,
+			this,
 			configuration,
 		);
 
 		return this;
 	}
+
+	// eslint-disable-next-line
+	public abstract run(message: Message, args: string[]): Promise<any>
 };
 
 export default BaseCommand;

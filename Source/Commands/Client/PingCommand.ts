@@ -12,4 +12,8 @@ export default class PingCommand extends BaseCommand {
 			],
 		});
 	}
+
+	public async run() {
+		console.log("Jell World 🍲");
+	}
 };

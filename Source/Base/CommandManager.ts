@@ -12,9 +12,9 @@ export default class CommandManager {
 	}
 
 	register(command: BaseCommand) {
-		this.cache.set(command.config.name.toLowerCase(), command);
-		command.config.aliases?.forEach(alias => this.registerAlias(
-			command.config.name, alias,
+		this.cache.set(command.name.toLowerCase(), command);
+		command.aliases?.forEach(alias => this.registerAlias(
+			command.name, alias,
 		));
 		return this;
 	}
