@@ -1,9 +1,0 @@
-{
-	"powermode.enabled": true,
-	"powermode.enableShake": false,
-	"workbench.iconTheme": "material-icon-theme",
-	"powermode.presets": "particles",
-	"bracket-pair-colorizer-2.colorMode": "Consecutive",
-	"bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
-	"workbench.colorTheme": "One Dark Pro"
-}

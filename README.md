@@ -1,2 +1,9 @@
-# Gasper
- Gaspy the ghost OwO
+- Don't Copy code
+- Coded in TypeScript
+- I delete my projects a lot don't be surprised if you see this gone
+- Am a big dumb 😀 (Proud of that OFC)
+- To Do:
+	- [ ] Initialise Bot
+	- [ ] Extend client
+	- [ ] Add command & event base
+	- [ ] Work on More commands? No idea 🤷‍♂️ 
