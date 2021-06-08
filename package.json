@@ -1,0 +1,30 @@
+{
+  "name": "contrast",
+  "version": "0.0.0",
+  "description": "Contrast is a discord bot.",
+  "main": "DoesNotExist.js",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "run": "npm run re-iter",
+    "dev": "npm run run",
+    "ts-node-dev": "npx ts-node-dev ./Source/Bot.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpiderMath/Constrast.git"
+  },
+  "author": "Defective Detective",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/SpiderMath/Constrast/issues"
+  },
+  "homepage": "https://github.com/SpiderMath/Constrast#readme"
+}
