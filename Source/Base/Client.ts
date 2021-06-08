@@ -60,6 +60,10 @@ class ContrastingClient extends Client {
 					const pull = new pseudoPull.default(this) as BaseCommand;
 					// This is what I was talking about! Now pull's gonna be a class instance (needs client as param 😸), which extends our beloved BaseCommand 🤔
 
+					// Stuff you should always do 😬
+					pull.category = dir;
+					pull.location = join(commandDir, dir, file);
+
 					this.commands.register(pull);
 					// Setting it into our commands list properly 💃
 

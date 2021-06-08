@@ -7,6 +7,8 @@ abstract class BaseCommand {
 	public name: string;
 	public description: string;
 	public aliases: string[];
+	public location: string;
+	public category: string;
 
 	// Takes in parameters
 	constructor(client: ContrastingClient) {
@@ -14,6 +16,8 @@ abstract class BaseCommand {
 		this.name = "";
 		this.description = "";
 		this.aliases = [];
+		this.category = "";
+		this.location = __filename;
 
 		Object.defineProperty(
 			this,
