@@ -1,0 +1,10 @@
+{
+	"workbench.colorTheme": "Monokai Pro (Filter Ristretto)",
+	"powermode.enabled": true,
+	"powermode.enableShake": false,
+	"powermode.presets": "particles",
+	"powermode.enableExplosions": true,
+	"bracket-pair-colorizer-2.colorMode": "Consecutive",
+	"bracket-pair-colorizer-2.highlightActiveScope": true,
+	"workbench.iconTheme": "material-icon-theme"
+}
