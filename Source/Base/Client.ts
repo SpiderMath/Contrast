@@ -2,7 +2,7 @@ import { Client, Intents } from "discord.js";
 import { readdirSync } from "fs";
 import { join } from "path";
 import StartConfig from "../Types/StartConfig";
-import Logger from "../Util/Logger";
+import Logger from "../Helpers/Logger";
 import BaseCommand from "./BaseCommand";
 import BaseEvent from "./BaseEvent";
 import CommandManager from "./CommandManager";
