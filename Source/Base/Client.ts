@@ -87,7 +87,8 @@ class ContrastingClient extends Client {
 				const pull = new pseudoPull.default(this) as BaseEvent;
 
 				// Listening for the event
-				this.on(pull.name, (...args: any[]) => pull.run(args));
+				// @ts-ignore
+				this.on(pull.name, async (...args: any[]) => await pull.run(args));
 
 				// Logging to let the dumb dev know that his event is being listened to
 				this.logger.success("client/events", `Listening for Event ${pull.name}`);

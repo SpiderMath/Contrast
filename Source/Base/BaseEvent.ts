@@ -1,7 +1,7 @@
 import { ClientEvents } from "discord.js";
 import ContrastingClient from "./Client";
 
-abstract class BaseEvent {
+class BaseEvent {
 	public name: keyof ClientEvents;
 	public client: ContrastingClient;
 
@@ -16,12 +16,12 @@ abstract class BaseEvent {
 				enumerable: false,
 				configurable: true,
 				writable: true,
+				value: client,
 			},
 		);
-	}
 
-	// eslint-disable-next-line
-	abstract run(...args: any[]): Promise<any>
+		// console.log(this.client);
+	}
 };
 
 export default BaseEvent;

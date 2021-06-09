@@ -11,4 +11,5 @@ new ContrastingClient()
 		token: process.env.token,
 		commandDir: join(__dirname, "Commands"),
 		eventDir: join(__dirname, "Events"),
+		prefixes: ["`"],
 	});

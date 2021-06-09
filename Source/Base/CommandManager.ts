@@ -28,4 +28,12 @@ export default class CommandManager {
 		if(mode === "command") return this.cache.delete(name);
 		if(mode === "alias") return this.aliasCache.delete(name);
 	}
+
+	get(name: string) {
+		// @ts-ignore
+		const command = this.cache.get(name.toLowerCase()) || this.cache.get(this.aliasCache.get(name));
+
+		if(!command) return null;
+		return command;
+	}
 };
