@@ -9,7 +9,7 @@ export default class MessageEvent extends BaseEvent {
 
 	async run(message: Message) {
 		// Checking if author is a bot
-		// if(message.author.bot) return;
+		if(message.author.bot) return;
 
 		// Will be used soon™
 		let prefix = "";

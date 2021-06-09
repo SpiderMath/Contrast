@@ -88,7 +88,7 @@ class ContrastingClient extends Client {
 
 				// Listening for the event
 				// @ts-ignore
-				this.on(pull.name, async (...args: any[]) => await pull.run(args));
+				this.on(pull.name, async (...args: any[]) => await pull.run(...args));
 
 				// Logging to let the dumb dev know that his event is being listened to
 				this.logger.success("client/events", `Listening for Event ${pull.name}`);
