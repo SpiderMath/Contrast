@@ -3,7 +3,7 @@
 - I delete my projects a lot don't be surprised if you see this gone
 - Am a big dumb 😀 (Proud of that OFC)
 - To Do:
-	- [ ] Initialise Bot
-	- [ ] Extend client
-	- [ ] Add command & event base
+	- [x] Initialise Bot
+	- [x] Extend client
+	- [x] Add command & event base
 	- [ ] Work on More commands? No idea 🤷‍♂️ 
