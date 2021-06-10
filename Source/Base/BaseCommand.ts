@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import CommandConfig from "../Types/CommandConfig";
+import { CommandConfig, Credit } from "../Types/CommandConfig";
 import ContrastingClient from "./Client";
 
 abstract class BaseCommand {
@@ -9,6 +9,7 @@ abstract class BaseCommand {
 	public aliases: string[];
 	public location: string;
 	public category: string;
+	public credits: Credit[] = [];
 
 	// Takes in parameters
 	constructor(client: ContrastingClient) {
@@ -35,6 +36,13 @@ abstract class BaseCommand {
 			this,
 			configuration,
 		);
+
+		this.credits.push({
+			name: "Defective Detective",
+			reason: "Code",
+			URL: "https://github.com/SpiderMath",
+			reasonURL: "https://github.com/SpiderMath/Contrast",
+		});
 
 		return this;
 	}

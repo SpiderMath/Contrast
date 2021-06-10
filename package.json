@@ -1,6 +1,6 @@
 {
   "name": "contrast",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Contrast is a discord bot.",
   "main": "DoesNotExist.js",
   "dependencies": {
