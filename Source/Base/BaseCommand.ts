@@ -1,54 +1,44 @@
-import { Message } from "discord.js";
+import { Message, PermissionResolvable } from "discord.js";
 import { CommandConfig, Credit } from "../Types/CommandConfig";
 import ContrastingClient from "./Client";
 
-abstract class BaseCommand {
+export default abstract class BaseCommand {
 	public client: ContrastingClient;
+	// @ts-ignore
 	public name: string;
+	// @ts-ignore
 	public description: string;
-	public aliases: string[];
-	public location: string;
-	public category: string;
 	public credits: Credit[] = [];
+	public guildOnly: boolean = true;
+	public devOnly: boolean = true;
+	public cooldown: number = 3;
+	public minArgs: number = 0;
+	public clientPermissions: PermissionResolvable[] = [];
+	public userPermissions: PermissionResolvable[] = [];
+	public aliases: string[] = [];
+	public nsfw: boolean = false;
+	public category: string = "";
 
-	// Takes in parameters
-	constructor(client: ContrastingClient) {
+	constructor(client: ContrastingClient, config: CommandConfig) {
 		this.client = client;
-		this.name = "";
-		this.description = "";
-		this.aliases = [];
-		this.category = "";
-		this.location = __filename;
 
 		Object.defineProperty(
 			this,
 			"client",
 			{
-				writable: true,
 				enumerable: false,
+				writable: true,
 				configurable: true,
 			},
 		);
-	}
 
-	public configure(configuration: CommandConfig) {
-		Object.assign(
-			this,
-			configuration,
-		);
-
-		this.credits.push({
-			name: "Defective Detective",
-			reason: "Code",
-			URL: "https://github.com/SpiderMath",
-			reasonURL: "https://github.com/SpiderMath/Contrast",
-		});
-
-		return this;
+		Object
+			.assign(
+				this,
+				config,
+			);
 	}
 
 	// eslint-disable-next-line
-	public abstract run(message: Message, args: string[]): Promise<any>
+	abstract run(message: Message, args: string[]): Promise<any>;
 };
-
-export default BaseCommand;

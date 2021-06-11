@@ -3,6 +3,12 @@ interface StartConfig {
 	commandDir: string,
 	eventDir: string,
 	prefixes: string[],
+	emojis?: {
+		success?: string,
+		loading?: string,
+		error?: string,
+	},
+	devs: `${bigint}`[],
 };
 
-export default StartConfig;
+export { StartConfig };

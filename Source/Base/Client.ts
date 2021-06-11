@@ -1,31 +1,30 @@
-import { Client, Intents } from "discord.js";
-import { readdirSync } from "fs";
+import { Client, Collection, ColorResolvable, Intents, Message, MessageEmbed, User } from "discord.js";
+import { readdir } from "fs/promises";
 import { join } from "path";
-import StartConfig from "../Types/StartConfig";
-import Logger from "../Helpers/Logger";
+import { loadEmojis } from "../Helpers/Client/LoadEmojis";
+import { loadDevs } from "../Helpers/Client/LoadDevelopers";
+import { StartConfig } from "../Types/StartConfig";
 import BaseCommand from "./BaseCommand";
 import BaseEvent from "./BaseEvent";
 import CommandManager from "./CommandManager";
+import Logger from "./Logger";
+import { existsSync, readFileSync } from "fs";
 
-class ContrastingClient extends Client {
+export default class ContrastingClient extends Client {
 	public commands: CommandManager;
-	public logger = Logger;
 	public prefixes: string[] = [];
+	public emotes = {
+		success: "✅",
+		error: "❌",
+		loading: "🤔",
+	};
+	public devs: Collection<string, User> = new Collection();
+	public logger = new Logger(join(__dirname, "../../Server/Logs.json"));
 
 	constructor() {
 		super({
-			// Enables all the intents, because WHY NOT?
 			intents: Intents.ALL,
-			// WS means Websocket lol
-			ws: {
-				// Setting Browser as Discord Android -> Will look as if the bot is on Mobile 📱
-				properties: { $browser: "Discord Android" },
-			},
-			// Allowed mentions, does as the thing says?
 			allowedMentions: {
-				// Replied User is ponged? I think he/she/they SHOULD NOT be ponged, so Yeah...
-				repliedUser: false,
-				// Types of mentions parsed 😀
 				parse: [
 					"everyone",
 					"roles",
@@ -34,66 +33,81 @@ class ContrastingClient extends Client {
 			},
 		});
 
-		// Assigning Commands to CommandManager
 		this.commands = new CommandManager(this);
 	}
 
 	async start(config: StartConfig) {
-		this.prefixes = config.prefixes;
-
+		config.prefixes.forEach(prefix => this.prefixes.push(prefix));
 		await this._loadEvents(config.eventDir);
 		await this._loadCommands(config.commandDir);
 		this.login(config.token);
+
+		this.once("ready", () => {
+			loadEmojis(this, config.emojis);
+			loadDevs(this, config.devs);
+		});
 	}
 
 	private async _loadCommands(commandDir: string) {
-		readdirSync(commandDir)
-		// This returns an array (string[]) of all the files & directories in commandDir
-			.forEach(async (dir) => {
-				// Dir is the sub directory name in commandDir, I am not gonna add any files in the command Directory Lol
-				const files = readdirSync(join(commandDir, dir));
-				// Files is an array of all the file names in the subDirectory of commands
+		const subDirs = await readdir(commandDir);
+		const categoryMap = this.loadJSON(join(__dirname, "../../Assets/JSON/categoryMap.json"));
 
-				for(const file of files) {
-					// File is a string, which is a FILE NAME IN THE SUB DIRECTORY
-					const pseudoPull = await import(join(commandDir, dir, file));
-					// Ah yes, import is a promise, unlike Node.js where it is require() OOF
-					// It is named Pseudopull because I'll be pulling the actual stuff using .default
+		for(const subDir of subDirs) {
+			const files = await readdir(join(commandDir, subDir));
+			this.logger.info("client/commands", `Loading subdirectory ${subDir}`);
 
-					const pull = new pseudoPull.default(this) as BaseCommand;
-					// This is what I was talking about! Now pull's gonna be a class instance (needs client as param 😸), which extends our beloved BaseCommand 🤔
+			for(const file of files) {
+				const pseudoPull = await import(join(commandDir, subDir, file));
+				const pull = new pseudoPull.default(this) as BaseCommand;
 
-					// Stuff you should always do 😬
-					pull.category = dir;
-					pull.location = join(commandDir, dir, file);
+				pull.category = categoryMap[subDir] || subDir;
+				pull.credits.push(
+					{
+						name: "SpiderMath",
+						reason: "Code",
+						URL: "https://github.com/SpiderMath",
+						reasonURL: "https://github.com/SpiderMath/CodeFictionist",
+					},
+				);
 
-					this.commands.register(pull);
-					// Setting it into our commands list properly 💃
+				this.commands.register(pull.name, pull);
+				pull.aliases.forEach(alias => this.commands.register(pull.name, alias));
 
-					// Logging to let the dumb owner know that the command was loaded
-					this.logger.success("client/commands", `Loaded Command ${pull.name}`);
-				}
-			});
+				this.logger.success("client/commands", `Loaded command ${pull.name} 💪`);
+			}
+		}
 	}
 
 	private async _loadEvents(eventDir: string) {
-		readdirSync(eventDir)
-		// This returns an array (string[]) of all the files in Event Dir
-			.forEach(async (fName) => {
-				// fName as the name suggests is the File name lul
-				const pseudoPull = await import(join(eventDir, fName));
+		const files = await readdir(eventDir);
 
-				// Initialization
-				const pull = new pseudoPull.default(this) as BaseEvent;
+		for(const file of files) {
+			const pseudoPull = await import(join(eventDir, file));
+			const pull = new pseudoPull.default(this) as BaseEvent;
 
-				// Listening for the event
-				// @ts-ignore
-				this.on(pull.name, async (...args: any[]) => await pull.run(...args));
+			this.on(pull.name, (...args: any[]) => pull.run(...args));
 
-				// Logging to let the dumb dev know that his event is being listened to
-				this.logger.success("client/events", `Listening for Event ${pull.name}`);
-			});
+			this.logger.success("client/events", `Listening for event: ${pull.name} 👂`);
+		}
+	}
+
+	public loadJSON(pathToJSON: string) {
+		if(!existsSync(pathToJSON)) throw new Error("Invalid path provided");
+
+		const data = readFileSync(pathToJSON);
+		const parsed = JSON.parse(data.toString());
+
+		return parsed;
+	}
+
+	public embed(author: User, colour?: ColorResolvable) {
+		return new MessageEmbed()
+			.setTimestamp()
+			.setColor(colour || "GREEN")
+			.setAuthor(author.tag, author.displayAvatarURL({ dynamic: true }));
+	}
+
+	public sendEmbed(message: Message, embed: MessageEmbed) {
+		message.channel.send({ embed });
 	}
 };
-
-export default ContrastingClient;

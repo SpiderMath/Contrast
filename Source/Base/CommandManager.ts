@@ -5,35 +5,25 @@ import ContrastingClient from "./Client";
 export default class CommandManager {
 	public client: ContrastingClient;
 	public cache: Collection<string, BaseCommand> = new Collection();
-	public aliasCache: Collection<string, string> = new Collection();
+	public aliases: Collection<string, string> = new Collection();
 
 	constructor(client: ContrastingClient) {
 		this.client = client;
 	}
 
-	register(command: BaseCommand) {
-		this.cache.set(command.name.toLowerCase(), command);
-		command.aliases?.forEach(alias => this.registerAlias(
-			command.name, alias,
-		));
-		return this;
+	public register(name: string, input: BaseCommand | string) {
+		if(typeof input === "string") this.aliases.set(input.toLowerCase(), name.toLowerCase());
+		else if(input instanceof BaseCommand) this.cache.set(name.toLowerCase(), input);
+		else throw new TypeError("Expected BaseCommand | string, received something else...");
+
+		return true;
 	}
 
-	registerAlias(name: string, alias: string) {
-		this.aliasCache.set(alias.toLowerCase(), name.toLowerCase());
-		return this;
-	}
-
-	unregister(name: string, mode: "alias" | "command" = "command") {
-		if(mode === "command") return this.cache.delete(name);
-		if(mode === "alias") return this.aliasCache.delete(name);
-	}
-
-	get(name: string) {
+	public get(name: string) {
 		// @ts-ignore
-		const command = this.cache.get(name.toLowerCase()) || this.cache.get(this.aliasCache.get(name));
+		const command = this.cache.get(name.toLowerCase()) || this.cache.get(this.aliases.get(name.toLowerCase()));
 
 		if(!command) return null;
-		return command;
+		else return command;
 	}
 };

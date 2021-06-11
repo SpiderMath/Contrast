@@ -1,0 +1,184 @@
+[
+	{
+		"id": 1,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: message 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:14:01 GMT"
+	},
+	{
+		"id": 2,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: ready 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:14:02 GMT"
+	},
+	{
+		"id": 3,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Admin",
+		"timestamp": "Fri, 11 Jun 2021 10:14:02 GMT"
+	},
+	{
+		"id": 4,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: message 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:16:36 GMT"
+	},
+	{
+		"id": 5,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: ready 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:16:36 GMT"
+	},
+	{
+		"id": 6,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Admin",
+		"timestamp": "Fri, 11 Jun 2021 10:16:36 GMT"
+	},
+	{
+		"id": 7,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: message 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:17:03 GMT"
+	},
+	{
+		"id": 8,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: ready 👂",
+		"timestamp": "Fri, 11 Jun 2021 10:17:04 GMT"
+	},
+	{
+		"id": 9,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Admin",
+		"timestamp": "Fri, 11 Jun 2021 10:17:04 GMT"
+	},
+	{
+		"id": 10,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command fetchlogs 💪",
+		"timestamp": "Fri, 11 Jun 2021 10:17:05 GMT"
+	},
+	{
+		"id": 11,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command viewlog 💪",
+		"timestamp": "Fri, 11 Jun 2021 10:17:05 GMT"
+	},
+	{
+		"id": 12,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command viewlogcount 💪",
+		"timestamp": "Fri, 11 Jun 2021 10:17:06 GMT"
+	},
+	{
+		"id": 13,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Client",
+		"timestamp": "Fri, 11 Jun 2021 10:17:06 GMT"
+	},
+	{
+		"id": 14,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command credit 💪",
+		"timestamp": "Fri, 11 Jun 2021 10:17:06 GMT"
+	},
+	{
+		"id": 15,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command ping 💪",
+		"timestamp": "Fri, 11 Jun 2021 10:17:06 GMT"
+	},
+	{
+		"id": 16,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: message 👂",
+		"timestamp": "Fri, 11 Jun 2021 11:06:30 GMT"
+	},
+	{
+		"id": 17,
+		"type": "success",
+		"context": "client/events",
+		"message": "Listening for event: ready 👂",
+		"timestamp": "Fri, 11 Jun 2021 11:06:31 GMT"
+	},
+	{
+		"id": 18,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Admin",
+		"timestamp": "Fri, 11 Jun 2021 11:06:31 GMT"
+	},
+	{
+		"id": 19,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command fetchlogs 💪",
+		"timestamp": "Fri, 11 Jun 2021 11:06:32 GMT"
+	},
+	{
+		"id": 20,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command viewlog 💪",
+		"timestamp": "Fri, 11 Jun 2021 11:06:33 GMT"
+	},
+	{
+		"id": 21,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command viewlogcount 💪",
+		"timestamp": "Fri, 11 Jun 2021 11:06:33 GMT"
+	},
+	{
+		"id": 22,
+		"type": "info",
+		"context": "client/commands",
+		"message": "Loading subdirectory Client",
+		"timestamp": "Fri, 11 Jun 2021 11:06:33 GMT"
+	},
+	{
+		"id": 23,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command credit 💪",
+		"timestamp": "Fri, 11 Jun 2021 11:06:33 GMT"
+	},
+	{
+		"id": 24,
+		"type": "success",
+		"context": "client/commands",
+		"message": "Loaded command ping 💪",
+		"timestamp": "Fri, 11 Jun 2021 11:06:33 GMT"
+	},
+	{
+		"id": 25,
+		"type": "success",
+		"context": "client",
+		"message": "Logged in as Contrast#7801 successfully",
+		"timestamp": "Fri, 11 Jun 2021 11:06:36 GMT"
+	},
+	{
+		"id": 26,
+		"type": "success",
+		"context": "client/devs",
+		"message": "Added SpiderBro#8604 as a developer",
+		"timestamp": "Fri, 11 Jun 2021 11:06:36 GMT"
+	}
+]
